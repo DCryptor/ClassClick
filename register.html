@@ -21,13 +21,13 @@
             <div class="content">
                 <div class="inner-content">
                     <div class="inner-content-title">Класс-Клик</div>
-                    <form class="from-content" action="">
-                        <input class="signin-content" type="email" placeholder="E-mail">
-                        <input class="signin-content" type="text" placeholder="Фамилия">
-                        <input class="signin-content" type="text" placeholder="Имя">
-                        <input class="signin-content" type="text" placeholder="Отчество">
-                        <input class="signin-content date" type="date" value="2000-01-01">
-                        <select class="signin-content" name="" id="">
+                    <form class="from-content" action="vendor/register.php" method="POST">
+                        <input name="email" class="signin-content" type="email" placeholder="E-mail">
+                        <input name="lastname" class="signin-content" type="text" placeholder="Фамилия">
+                        <input name="firstname" class="signin-content" type="text" placeholder="Имя">
+                        <input name="secondname" class="signin-content" type="text" placeholder="Отчество">
+                        <input name="bday" class="signin-content date" type="date" value="2000-01-01">
+                        <select name="school" class="signin-content" name="" id="">
                             <option value="">МБОУ "Вилюйская НОШ №1"</option>
                             <option value="">МБОУ "Вилюйская НОШ №2"</option>
                             <option value="">МБОУ "Вилюйская СОШ №1"</option>
@@ -35,15 +35,15 @@
                             <option value="">МБОУ "Вилюйская СОШ №3"</option>
                             <option value="">МБОУ "Вилюйская гимназия"</option>
                         </select>
-                        <input class="signin-content" type="number" min="1" max="11" placeholder="Класс">
-                        <select class="signin-content" name="" id="">
+                        <input name="classnumber" class="signin-content" type="number" min="1" max="11" placeholder="Класс">
+                        <select name="classname" class="signin-content" name="" id="">
                             <option value="">a</option>
                             <option value="">б</option>
                             <option value="">в</option>
                             <option value="">г</option>
                         </select>
-                        <input class="signin-content" type="password" placeholder="Пароль">
-                        <input class="signin-content" type="password" placeholder="Подтверждение пароля">
+                        <input name="password" class="signin-content" type="password" placeholder="Пароль">
+                        <input name="passwordConfirm" class="signin-content" type="password" placeholder="Подтверждение пароля">
                         <button class="signin-content" type="submit">Регистрация</button>
                     </form>
                     <div class="passRecovery"><a class="passRecoveryLink" href="">Регистрируясь, вы принимаете наши Условия, Политику использования данных и Политику в отношении файлов cookie.</a></div>
