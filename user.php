@@ -1,9 +1,14 @@
+<?php
+session_start();
+require_once 'vendor/connect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style-user.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <title>Добро пожаловать | В Класс-Клик</title>
@@ -19,17 +24,22 @@
         </div>
         <div class="row">
             <div class="content">
-                <div class="inner-content">
-                    <div class="inner-content-title">Класс-Клик</div>
-                    <form class="from-content" action="vendor/login.php" method="POST">
-                        <input name="email" class="signin-content" type="email" placeholder="Логин или e-mail">
-                        <input name="password" class="signin-content" type="password" placeholder="Пароль">
-                        <button name="btn_signIn" class="signin-content" type="submit">Вход</button>
-                    </form>
-                    <div class="passRecovery"><a class="passRecoveryLink" href="">Забыли пароль?</a></div>
-                </div>
-                <div class="inner-content2">
-                    <div>У вас ещё нет аккаунта? <a class="registrationLink" href="register.html">Зарегистрироваться</a></div>
+                <div class="user-content">
+                    <p class="userData">Информация пользователя:</p>
+                    <p class="userData">
+                    <?=$_SESSION['user']['email'];?> </p>
+                    <p class="userData">
+                    <?=$_SESSION['user']['lastname'];?>
+                    <?=$_SESSION['user']['firstname'];?>
+                    <?=$_SESSION['user']['secondname'];?></p>
+                    <p class="userData">
+                    <?=$_SESSION['user']['bday'];?> </p>
+                    <p class="userData">
+                    <?=$_SESSION['user']['school'];?> </P>
+                    <p class="userData">
+                    <?=$_SESSION['user']['classnumber'];?>
+                    <?=$_SESSION['user']['classname'];?> </p>
+                    </p>
                 </div>
             </div>
         </div>
