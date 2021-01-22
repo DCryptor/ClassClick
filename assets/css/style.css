@@ -17,7 +17,11 @@ html,body{
 	font-size: 14px;
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 input,button,textarea{font-family:inherit;}
 
