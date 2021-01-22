@@ -19,34 +19,53 @@ if (!$_SESSION['user']) {
 </head>
 <body>
     <div class="wrapper">
+        <a class="menuHide" onclick="Hide('profileMenu');Hide('subjects');"></a>
         <div class="header">
             <div class="inner-header">
                 <div class="navmenu">
-                    <button class="navmenu menubutton">
+                    <a href="javascript:void(0)" class="profile profilebutton" onclick="showHide('subjects')" class="navmenu menubutton">
                         <img src="images/navmenu.png" alt="">
-                    </button>
+                    </a>
                 </div>
                 <div class="inner-header-profile">
                    <div class="profileImageFrame">
                         <img class="profileImage" src="images/<?=$_SESSION['user']['id']?>.jpg" alt="">
                     </div>
                     <div class="profileText">
-                        <form action="vendor/logout.php">
-                        <button class="profile profilebutton">
+                        <form action="">
+                        <a href="javascript:void(0)" class="profile profilebutton" onclick="showHide('profileMenu')">
                         <?=$_SESSION['user']['lastname']?> <?=mb_substr($_SESSION['user']['firstname'], 0, 1); $_SESSION['user']['firstname'];?>.<?=mb_substr($_SESSION['user']['secondname'], 0, 1); $_SESSION['user']['secondname'];?>.
-                        </button>
+                        </a>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
+            <div id="subjects" class="subjectsMenuBlock">
+                <ul class="subjectMenu">
+                    <li class="subjectMenu"><a class="subjectMenuLink">Математика</a></li>
+                </ul>
+            </div>
+            <div id="profileMenu" class="profileMenuBlock">
+                <ul>
+                    <li><button onclick="Hide('profileMenu')" class="profileMenuBtn">Открыть профиль</button></li>
+                    <li><button onclick="Hide('profileMenu')" class="profileMenuBtn">Одноклассники</button></li>
+                    <li><button onclick="Hide('profileMenu')" class="profileMenuBtn">Учителя</button></li>
+                    <li><form onclick="Hide('profileMenu')" action="vendor/logout.php"><button class="profileMenuBtn">Выйти</button></form></li>
+                </ul>
+            </div>
             <div class="content">
-                    <ul>
-                        <li>1. Выбираем учебный предмет.</li>
-                        <li>2. Выбираем день недели.</li>
-                        <li>3. Загружаем домашнее задание.</li>
-                    </ul>
+                <div class="tutorialBlock">
+                    <div class="tutorial headText1">Единая система домашних заданий</div>
+                    <div class="tutorial headText2">Класс-Клик</div>
+                    <div class="tutorialNumber">1</div>
+                   <div class="tutorial tutTitle">Выбрать учебный предмет.</div>
+                   <div class="tutorialNumber">2</div>
+                   <div class="tutorial tutTitle">Выбрать день недели.</div>
+                   <div class="tutorialNumber">3</div>
+                   <div class="tutorial tutTitle">Загрузить выполненную домашнюю работу.</div>
+                </div>
             </div>
             </div>
         </div>
@@ -59,5 +78,6 @@ if (!$_SESSION['user']) {
             </div>
         </div>
     </div>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

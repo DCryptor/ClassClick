@@ -51,7 +51,7 @@ else
         $sql = "INSERT INTO `users` (`id`, `email`, `lastname`, `firstname`, `secondname`, `bday`, `school`, `classnumber`, `classname`, `password`, `admin`) VALUES (NULL, '$email', '$lastname', '$firstname', '$secondname', '$bday', '$school', '$classnumber', '$classname', '$hash', '$admin')";
         mysqli_query ($connect,$sql);
         //header ('Location: ../register.html');
-        echo ("<SCRIPT LANGUAGE='JavaScript'> window.alert('Succesfully Registered'); window.location.href='../index.html'; </SCRIPT>");
+        echo ("<SCRIPT LANGUAGE='JavaScript'> window.alert('Succesfully Registered'); window.location.href='../index.php'; </SCRIPT>");
     }   
 }
 ?>
