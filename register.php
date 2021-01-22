@@ -1,8 +1,16 @@
+<?php
+session_start();
+require_once 'vendor/connect.php';
+if ($_SESSION['user']) {
+    header('Location: user.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/ico.jpg" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
@@ -49,7 +57,7 @@
                     <div class="passRecovery"><a class="passRecoveryLink" href="">Регистрируясь, вы принимаете наши Условия, Политику использования данных и Политику в отношении файлов cookie.</a></div>
                 </div>
                 <div class="inner-content2">
-                    <div>Есть аккаунт? <a class="registrationLink" href="index.html">Войти</a></div>
+                    <div>Есть аккаунт? <a class="registrationLink" href="index.php">Войти</a></div>
                 </div>
             </div>
         </div>
