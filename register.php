@@ -26,6 +26,19 @@ if ($_SESSION['user']) {
             </div>
         </div>
         <div class="row">
+        <?php
+        if ($_SESSION['message2'])
+        {?>
+            <div id="messageBox" class="messageBox" style="display:block">
+            <div class="message"><?=$_SESSION["message2"]?></div>
+            <button onclick="Hide('messageBox')" name="errorBtn" class="buttonErrorOk">Ок</button></div>
+        <?php
+        } 
+        else 
+        {
+            unset($_SESSION['message2']);
+        }
+        ?>
             <div class="content">
                 <div class="inner-content">
                     <div class="inner-content-title">Класс-Клик</div>
@@ -57,7 +70,7 @@ if ($_SESSION['user']) {
                     <div class="passRecovery"><a class="passRecoveryLink" href="">Регистрируясь, вы принимаете наши Условия, Политику использования данных и Политику в отношении файлов cookie.</a></div>
                 </div>
                 <div class="inner-content2">
-                    <div>Есть аккаунт? <a class="registrationLink" href="index.php">Войти</a></div>
+                    <div>Есть аккаунт? <a class="registrationLink" href="index.php" onclick="<?php unset($_SESSION['message2'])?>">Войти</a></div>
                 </div>
             </div>
         </div>
@@ -72,5 +85,6 @@ if ($_SESSION['user']) {
             </div>
         </div>
     </div>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

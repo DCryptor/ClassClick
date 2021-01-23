@@ -17,33 +17,47 @@ $admin = 0;
 $check_email = mysqli_query($connect, "SELECT * FROM `users` WHERE `email` = '$email'");
 if (mysqli_num_rows($check_email) > 0) 
 {
-    echo ('Такой пользователь уже зарегистрирован');
+    $_SESSION['message2'] = 'Такой пользователь уже зарегистрирован';
+    header('Location: ../register.php');
+    exit;
 }
 else 
 {
     if ($email === "")
     {
-        echo ("Введите email");
+        $_SESSION['message2'] = 'Введите email';
+        header('Location: ../register.php');
+        exit;
     }
     if ($lastname === "")
     {
-        echo ("Введите фамилию");
+        $_SESSION['message2'] = 'Введите фамилию';
+        header('Location: ../register.php');
+        exit;
     }
     if ($firstname === "")
     {
-        echo ("Введите имя");
+        $_SESSION['message2'] = 'Введите имя';
+        header('Location: ../register.php');
+        exit;
     }
     if ($secondname === "")
     {
-        echo ("Введите отчество");
+        $_SESSION['message2'] = 'Введите отчество';
+        header('Location: ../register.php');
+        exit;
     }
     if ($password === "")
     {
-        echo ("Введите пароль");
+        $_SESSION['message2'] = 'Введите пароль';
+        header('Location: ../register.php');
+        exit;
     }
     if ($password != $passwordConfirm)
     {
-        echo ("Пароли не совпадают");
+        $_SESSION['message2'] = 'Пароли не совпадают';
+        header('Location: ../register.php');
+        exit;
     }
     if ($email != "" and $lastname != "" and $firstname != "" and $secondname !="" and $password != "" and $passwordConfirm != "" and $password === $passwordConfirm)
     {

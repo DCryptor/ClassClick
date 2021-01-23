@@ -18,6 +18,19 @@ if ($_SESSION['user']) {
 </head>
 <body>
     <div class="wrapper">
+    <?php
+    if ($_SESSION['message'])
+    {?>
+        <div id="messageBox" class="messageBox" style="display:block">
+        <div class="message"><?=$_SESSION["message"]?></div>
+        <button onclick="Hide('messageBox')" name="errorBtn" class="buttonErrorOk">Ок</button></div>
+    <?php
+    } 
+    else 
+    {
+        unset($_SESSION['message']);
+    }
+    ?>
         <div class="header">
             <div class="inner-header">
                 <div class="inner-header-title">
@@ -37,7 +50,7 @@ if ($_SESSION['user']) {
                     <div class="passRecovery"><a class="passRecoveryLink" href="">Забыли пароль?</a></div>
                 </div>
                 <div class="inner-content2">
-                    <div>У вас ещё нет аккаунта? <a class="registrationLink" href="register.php">Зарегистрироваться</a></div>
+                    <div>У вас ещё нет аккаунта? <a class="registrationLink" href="register.php" onclick="<?php unset($_SESSION['message'])?>"> Зарегистрироваться</a></div>
                 </div>
             </div>
         </div>
@@ -50,5 +63,6 @@ if ($_SESSION['user']) {
             </div>
         </div>
     </div>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

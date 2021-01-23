@@ -18,7 +18,8 @@ function Hide(elementHide_id){
         var object = document.getElementById(elementHide_id); 
     if (object.style.display == "block" || obj.style.display == "block")
         {   
-            object.style.display = "none";
+            var jsVar = "<?php echo 'unset($_SESSION['message'])' ?>";
+           /* object.style.display = "none";*/
         }
     }
 }

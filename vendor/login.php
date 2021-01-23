@@ -29,16 +29,20 @@ if (mysqli_num_rows($check_email) > 0)
     if (password_verify($password,$hash))
     {   
         header('Location: ../user.php');
-        echo('Вход выполнен!');
     }
     else
     {
-        echo('Неверный пароль!');
+        $_SESSION['user'] = null;
+        $_SESSION['message'] = 'Неверный пароль!';
+        header('Location: ../index.php');
+        exit;
     }
 } 
 else 
 {
-    echo ('Такой пользователь не зарегистрирован!');
+    $_SESSION['message'] = 'Такой пользователь не зарегистрирован!';
+    header('Location: ../index.php');
+    exit;
 }
 }
 ?>

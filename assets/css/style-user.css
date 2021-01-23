@@ -220,6 +220,7 @@ button{
 }
 .headText1{
     text-transform: uppercase;
+    color: #C03737;
 }
 .headText2{
     margin-top: 10px;
@@ -230,6 +231,7 @@ button{
 .tutTitle{
     margin-top: 25px;
     text-transform: uppercase;
+    color: gray;
 }
 .tutorialNumber{
     margin-top: 20px;

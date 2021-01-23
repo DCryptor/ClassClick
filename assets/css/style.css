@@ -179,6 +179,29 @@ select{
 .inner-footer{
     flex: 1;
 }
+.messageBox{
+    padding-top: 70px;
+    padding-bottom: 70px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #dadada;
+    background: white;
+    width: 400px;
+    height: auto;
+    max-height: 200px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+.buttonErrorOk{
+    margin-top: 20px;
+    width: 130px;
+}
 /*----------------------------------------------------------------------------------------------------------*/
 @media (max-width: 900px)
 {
