@@ -19,7 +19,7 @@ function Hide(elementHide_id){
     if (object.style.display == "block" || obj.style.display == "block")
         {   
             var jsVar = "<?php echo 'unset($_SESSION['message'])' ?>";
-           /* object.style.display = "none";*/
+            object.style.display = "none";
         }
     }
 }
