@@ -248,6 +248,23 @@ button{
     color: white;
     border-radius: 50%;
 }
+.subjectTitle{
+    font-family: Lobster;
+    color: #C03737;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 30px;
+}
+.content_subject_elements{
+    width: 400px;
+    min-width: 200px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.uploadElement{
+    margin-top: 15px;
+}
 
 @media (max-width: 900px)
 {

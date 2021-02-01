@@ -5,7 +5,19 @@ if (!$_SESSION['user']) {
     header('Location: index.php');
 }
 ?>
-
+<!-- Отключаем туториал блок!-->
+<?php
+    if ($_GET['subject_id'] != "")
+    {
+        $contentBlock = "display:none";
+        $subjectContentBlock = "display:block";
+    }
+    else 
+    {
+        $subjectContentBlock = "display:none";
+        $contentBlock = "display:block";
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +53,7 @@ if (!$_SESSION['user']) {
                 </div>
             </div>
         </div>
+        <!-- Блок выбора предметов -->
         <div class="row">
             <div class="subjectsOverflow">
                 <div id="subjects" class="subjectsMenuBlock">
@@ -54,7 +67,7 @@ if (!$_SESSION['user']) {
                 foreach ($subjects as $subject) 
                 {
                 ?> 
-                    <li class="subjectMenu"><a href="?<?= http_build_query(array_merge($_GET, ['subject_id' => $subject['id']])); ?>" class="subjectMenuLink">▪ <?=$subject['subject']?></a></li>
+                    <li class="subjectMenu"><a href="?<?= http_build_query(array_merge($_GET, ['user_id' => $_SESSION['user']['id']],['subject_id' => $subject['id']])); ?>" class="subjectMenuLink">▪ <?=$subject['subject']?></a></li>
                 <?php
                 }
                 }
@@ -70,7 +83,8 @@ if (!$_SESSION['user']) {
                     <li><form onclick="Hide('profileMenu')" action="vendor/logout.php"><button class="profileMenuBtn">Выйти</button></form></li>
                 </ul>
             </div>
-            <div class="content">
+            <!-- Блок туториал -->
+            <div class="content" style="<?=$contentBlock?>">
                 <div class="tutorialBlock">
                     <div class="tutorial headText1">Единая система домашних заданий</div>
                     <div class="tutorial headText2">Класс-Клик</div>
@@ -82,6 +96,29 @@ if (!$_SESSION['user']) {
                    <div class="tutorial tutTitle">Загрузить выполненную домашнюю работу.</div>
                 </div>
             </div>
+            <!-- Блок предметов -->
+            <div class="content_subject" style="<?=$subjectContentBlock?>">
+                <div  class="subject_block">
+                <div class="subjectTitle">
+                <?php
+                 $my_subject = $_GET['subject_id'];
+                 $subjects_id = mysqli_query($connect, "SELECT * FROM `subjects` WHERE `id` = '$my_subject'");
+                if (mysqli_num_rows($subjects_id) > 0) 
+                {
+                $subject_id = mysqli_fetch_all($subjects_id, MYSQLI_ASSOC);
+                foreach ($subjects_id as $subject_id) 
+                {
+                    echo $subject_id['subject'];
+                }
+                }
+                ?></div>
+                <div class="content_subject_elements">
+                    <input class="uploadElement" type="date">
+                    <input class="uploadElement fileupload" type="file" multiple>
+                    <button class="uploadElement" type="submit">Загрузить</button>  
+                </div>
+                </div>
+                </div>
             </div>
         </div>
         <div class="footer">

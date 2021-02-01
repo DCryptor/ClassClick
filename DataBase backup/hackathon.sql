@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 22 2021 г., 18:55
+-- Время создания: Фев 01 2021 г., 05:29
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.1.33
 
@@ -66,6 +66,21 @@ INSERT INTO `subjects` (`id`, `subject`, `class`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `uploads`
+--
+
+CREATE TABLE `uploads` (
+  `id` int(11) NOT NULL,
+  `user_id` int(255) NOT NULL,
+  `subject_id` int(255) NOT NULL,
+  `class` int(255) NOT NULL,
+  `date` date NOT NULL,
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `users`
 --
 
@@ -90,7 +105,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `lastname`, `firstname`, `secondname`, `bday`, `school`, `classnumber`, `classname`, `password`, `admin`) VALUES
 (1, 'a@mail.ru', 'Альмуалимов', 'Альтаир', 'Альбертович', '2017-11-21', 'МБОУ Вилюйская НОШ №1', 1, 'в', '$2y$10$MRaXQcIIC98An3GLzAxvMuHNXtvSfCgLEUYQXPig6QrmCXiYJggL2', 0),
 (12, 'nik_soldat@mail.ru', 'Солдатов', 'Николай', 'Николаевич', '1993-10-15', 'МБОУ Вилюйская СОШ №1', 11, 'б', '$2y$10$r0tRjfXY32/F7tjm6EPkt.31f561wjg7RqmQs/NJDIzPsQantxJ2a', 0),
-(13, 'innokentevna.2020@gmail.com', 'Панькова', 'Диана', 'Иннокентьевна', '1993-05-20', 'МБОУ Вилюйская НОШ №1', 11, 'а', '$2y$10$qCX1qlKsQKxtZHPrucKWoejF2t129UqDZeN92X/zlHVQQzliF41Me', 0);
+(13, 'innokentevna.2020@gmail.com', 'Панькова', 'Диана', 'Иннокентьевна', '1993-05-20', 'МБОУ Вилюйская НОШ №1', 11, 'а', '$2y$10$qCX1qlKsQKxtZHPrucKWoejF2t129UqDZeN92X/zlHVQQzliF41Me', 0),
+(15, 'vasya@mail.ru', 'Прокопьев', 'Василий', 'Андреевич', '1992-05-05', 'МБОУ Вилюйская СОШ №2', 1, 'в', '$2y$10$YRaNv6yL9N5Xs.eCCZmQcOrrlcOmzte9UkGQKvxkMdGXLQhVxXXcy', 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -100,6 +116,12 @@ INSERT INTO `users` (`id`, `email`, `lastname`, `firstname`, `secondname`, `bday
 -- Индексы таблицы `subjects`
 --
 ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `uploads`
+--
+ALTER TABLE `uploads`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -119,10 +141,16 @@ ALTER TABLE `subjects`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
+-- AUTO_INCREMENT для таблицы `uploads`
+--
+ALTER TABLE `uploads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
