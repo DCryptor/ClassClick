@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 01 2021 г., 05:29
+-- Время создания: Фев 03 2021 г., 04:40
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.1.33
 
@@ -78,6 +78,15 @@ CREATE TABLE `uploads` (
   `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Дамп данных таблицы `uploads`
+--
+
+INSERT INTO `uploads` (`id`, `user_id`, `subject_id`, `class`, `date`, `path`) VALUES
+(44, 12, 4, 11, '2021-02-03', 'uploads/12/4/2021-02-03/16123162452.jpg'),
+(45, 12, 4, 11, '2021-02-03', 'uploads/12/4/2021-02-03/1612316268IMG_2121.JPG'),
+(46, 12, 4, 11, '2021-02-03', 'uploads/12/4/2021-02-03/1612316275IMG_2121.JPG');
+
 -- --------------------------------------------------------
 
 --
@@ -144,7 +153,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT для таблицы `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
