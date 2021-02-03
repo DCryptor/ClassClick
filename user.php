@@ -113,9 +113,11 @@ if (!$_SESSION['user']) {
                 }
                 ?></div>
                 <div class="content_subject_elements">
-                    <input class="uploadElement" type="date">
-                    <input class="uploadElement fileupload" type="file" multiple>
-                    <button class="uploadElement" type="submit">Загрузить</button>  
+                    <form method="POST" enctype="multipart/form-data">
+                    <input name="fileData" class="uploadElement" type="date">
+                    <input name="userFiles" class="uploadElement fileupload" type="file" multiple>
+                    <button name="uploadBtn" class="uploadElement" type="submit">Загрузить</button>
+                    </form>     
                 </div>
                 </div>
                 </div>
@@ -133,3 +135,41 @@ if (!$_SESSION['user']) {
     <script src="assets/js/main.js"></script>
 </body>
 </html>
+<?php
+    $name = time().$_FILES['userFiles']['name'];
+    $tmp_name = $_FILES['userFiles']['tmp_name'];
+    $id_user = $_SESSION['user']['id'];
+    $id_subject = $_GET['subject_id'];
+    $data = $_POST['fileData'];
+    $class = $_SESSION['user']['classnumber'];
+    $path = "uploads/$id_user/$id_subject/$data/";
+    $pathName = "uploads/$id_user/$id_subject/$data/$name";
+    $uploadButton = $_POST['uploadBtn'];
+    
+    if (isset($uploadButton))
+    {
+        if (is_dir($path))
+        {
+            if (!move_uploaded_file($tmp_name,$pathName))
+            {
+                echo "File is not uploaded!";
+            } 
+            else
+            {
+                mysqli_query ($connect, "INSERT INTO `uploads`(`id`, `user_id`, `subject_id`, `class`, `date`, `path`) VALUES (NULL, '$id_user', '$id_subject', '$class', '$data', '$pathName')");
+            }
+        }
+        else 
+        {
+            mkdir($path, 0755, true);
+            if (!move_uploaded_file($tmp_name,$pathName))
+            {
+                echo "File is not uploaded!";
+            } 
+            else
+            {
+                mysqli_query ($connect, "INSERT INTO `uploads`(`id`, `user_id`, `subject_id`, `class`, `date`, `path`) VALUES (NULL, '$id_user', '$id_subject', '$class', '$data', '$pathName')");
+            }
+        }
+    }
+?>
