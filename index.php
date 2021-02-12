@@ -1,8 +1,16 @@
 <?php
 session_start();
 require_once 'vendor/connect.php';
-if ($_SESSION['user']) {
-    header('Location: user.php');
+if ($_SESSION['user']) 
+{
+    if ($_SESSION['user']['admin'] =='0')
+    {
+    header('Location: user.php');   
+    }
+    elseif ($_SESSION['user']['admin'] =='1')
+    {
+    header('Location: teacher.php');   
+    }
 }
 ?>
 <!DOCTYPE html>

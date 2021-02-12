@@ -204,7 +204,7 @@ button{
 }
 .footer{
     text-align: center;
-    flex: 0 0 auto;
+    flex: 1 0 auto;
     border-top: 1px solid #dadada;
     height: 70px;
 }
@@ -265,7 +265,19 @@ button{
 .uploadElement{
     margin-top: 15px;
 }
-
+select{
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    outline: none;
+    height: 35px;
+    padding-left: 16px;
+    width: 100%;
+    background: none;
+}
+.content-select-school{
+    display: flex;
+    flex-direction: column;
+}
 @media (max-width: 900px)
 {
 .tutorialNumber{

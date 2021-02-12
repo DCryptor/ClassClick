@@ -2,7 +2,7 @@
     $host = "localhost";
     $user = "root";
     $password = "root";
-    $database = "hackathon";
+    $database = "classclick";
     $connect = mysqli_connect ($host,$user,$password,$database);
 
     if (!$connect)

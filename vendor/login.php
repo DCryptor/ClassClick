@@ -26,9 +26,17 @@ if (mysqli_num_rows($check_email) > 0)
     "admin" => $user['admin'],
     ];
     $hash = $_SESSION['user']['password'];
+    $isadmin = $_SESSION['user']['admin'];
     if (password_verify($password,$hash))
     {   
-        header('Location: ../user.php');
+        if ($isadmin == '0')
+        {
+            header('Location: ../user.php');
+        }
+        elseif ($isadmin == '1')
+        {
+            header('Location: ../teacher.php');
+        }
     }
     else
     {
