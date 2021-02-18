@@ -6,14 +6,16 @@ if (!$_SESSION['user']) {
 }
 ?>
 <?php
-    if ($_GET['subject_id'] != "")
+    if ($_GET['scoolselect'] != "" and $_GET['classname'] != "" and $_GET['subject'] != "")
     {
         $contentBlock = "display:none";
-        $subjectContentBlock = "display:block";
+        $subjectContentBloc = "display:block";
+        $subjectContentBlocs = "display:flex";
     }
     else 
     {
-        $subjectContentBlock = "display:none";
+        $subjectContentBloc = "display:none";
+        $subjectContentBlocs = "display:none";
         $contentBlock = "display:block";
     }
 ?>
@@ -34,8 +36,8 @@ if (!$_SESSION['user']) {
         <div class="header">
             <div class="inner-header">
                 <div class="navmenu">
-                    <a href="javascript:void(0)" class="profile profilebutton" onclick="showHide('subjects'); Hide('profileMenu');" class="navmenu menubutton">
-                        <img src="images/navmenu.png" alt="">
+                    <a style="<?=$subjectContentBlocs?> href="javascript:void(0)" class="profile profilebutton" onclick="showHide('subjects'); Hide('profileMenu');" class="navmenu menubutton">
+                        <img style="<?=$subjectContentBlocs?>" src="images/navmenu.png" alt="">
                     </a>
                 </div>
                 <div class="inner-header-profile">
@@ -58,19 +60,27 @@ if (!$_SESSION['user']) {
                 <div id="subjects" class="subjectsMenuBlock">
                 <ul class="subjectMenu">
                 <?php
-                $my_class = $_SESSION['user']['classnumber'];
-                $subjects_class = mysqli_query($connect, "SELECT * FROM `subjects` WHERE `class` = '$my_class'");
-                if (mysqli_num_rows($subjects_class) > 0) 
-                {
-                $subjects = mysqli_fetch_all($subjects_class, MYSQLI_ASSOC);
-                foreach ($subjects as $subject) 
-                {
-                ?> 
-                    <li class="subjectMenu"><a href="?<?= http_build_query(array_merge($_GET, ['user_id' => $_SESSION['user']['id']],['subject_id' => $subject['id']])); ?>" class="subjectMenuLink">▪ <?=$subject['subject']?></a></li>
-                <?php
-                }
-                }
+                    $myclassselect = $_GET['scoolselect'];
+                    $myclassnameselect = $_GET['classname'];
+                    $nameShkola = $_SESSION['user']['school'];
+                    $isUchenik = "0";
+                    $userSelect = mysqli_query($connect, "SELECT * FROM `users` 
+                    WHERE `admin` = '$isUchenik' 
+                    AND `classname` = '$myclassnameselect' 
+                    AND `school` = '$nameShkola' 
+                    AND `classnumber` = '$myclassselect'");
+                    if (mysqli_num_rows($userSelect) > 0) 
+                    {
+                    $usersSelect = mysqli_fetch_all($userSelect, MYSQLI_ASSOC);
+                    foreach ($usersSelect as $ucheniki) 
+                        {
+                        ?> 
+                        <li class="subjectMenu"><a class="subjectMenuLink2" href="?<?= http_build_query(array_merge($_GET, ['user_id' => $ucheniki['id']])); ?>"><?=$ucheniki['lastname']?> <?=$ucheniki['firstname']?> <?=$ucheniki['secondname']?></a></li>
+                        <?php
+                        }
+                    }
                 ?>
+                <li><a class="subjectMenuLink2" href="teacher.php">Назад</a></li>
                 </ul>
                 </div>
             </div>
@@ -83,52 +93,67 @@ if (!$_SESSION['user']) {
                 </ul>
             </div>
             <!-- Блок туториал -->
-            <div class="content" style="<?=$contentBlock?>">
-                <div class="schoolSelectBlock">
-                    <div class="content-select-school">
-                        <div>
-                        Выберите класс: 
-                        <select name="" id="">
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                        </select>
-                        </div> 
-                        <input type="radio" name="classname" value="а">а
-                        <input type="radio" name="classname" value="б">б
-                        <input type="radio" name="classname" value="в">в
-                        <input type="radio" name="classname" value="г">г
-                    </div>
-                </div>
-            </div>
-            <!-- Блок предметов -->
-            <div class="content_subject" style="<?=$subjectContentBlock?>">
-                <div  class="subject_block">
-                <div class="subjectTitle">
+            <form action="" method="GET">
+            <div class="content-school" style="<?=$contentBlock?>">
+            <div class="subjectTitl">Выберите класс и предмет</div>
+                <select name="scoolselect" id="">
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                </select>
+                <select name="classname" id="">
+                    <option value="а">а</option>
+                    <option value="б">б</option>
+                    <option value="в">в</option>
+                    <option value="г">г</option>
+                </select>
+                <select name="subject" id="">
                 <?php
-                 $my_subject = $_GET['subject_id'];
-                 $subjects_id = mysqli_query($connect, "SELECT * FROM `subjects` WHERE `id` = '$my_subject'");
-                if (mysqli_num_rows($subjects_id) > 0) 
-                {
-                $subject_id = mysqli_fetch_all($subjects_id, MYSQLI_ASSOC);
-                foreach ($subjects_id as $subject_id) 
-                {
-                    echo $subject_id['subject'];
-                }
-                }
-                ?></div>
-                <div class="content_subject_elements">
-                    <form method="POST" enctype="multipart/form-data">
-                    <input name="fileData" class="uploadElement" type="date">
-                    <input name="userFiles" class="uploadElement fileupload" type="file" multiple>
-                    <button name="uploadBtn" class="uploadElement" type="submit">Загрузить</button>
-                    </form>     
-                </div>
-                </div>
+                    $my_class = $_SESSION['user']['classnumber'];
+                    $subjects_class = mysqli_query($connect, "SELECT * FROM `subjects` WHERE `class` = '$my_class'");
+                    if (mysqli_num_rows($subjects_class) > 0) 
+                    {
+                    $subjects = mysqli_fetch_all($subjects_class, MYSQLI_ASSOC);
+                    foreach ($subjects as $subject) 
+                        {
+                        ?> 
+                        <option class="subjectMenu" value="<?=$subject['id']?>"><a href="?<?= http_build_query(array_merge($_GET, ['user_id' => $_SESSION['user']['id']],['subject_id' => $subject['id']])); ?>" class="subjectMenuLink">▪ <?=$subject['subject']?></a></option>
+                        <?php
+                        }
+                    }
+                 ?>
+                </select>
+                <button class="selectBtn">Выбрать</button>
+            </div>
+            </form>
+            <!-- Блок предметов -->
+                <div class="usersBlock">
+                <!--select name="userSelect" id=""-->
+                <?php
+                    $fUserID = $_GET['user_id'];
+                    $fSubjectID = $_GET['subject'];
+                    $fClassID = $_GET['scoolselect'];
+
+                    $uploadFiles = mysqli_query($connect, "SELECT * FROM `uploads` 
+                    WHERE `user_id` = '$fUserID' 
+                    AND `subject_id` = '$fSubjectID' 
+                    AND `class` = '$fClassID'");
+                    if (mysqli_num_rows($uploadFiles) > 0) 
+                    {
+                    $files = mysqli_fetch_all($uploadFiles, MYSQLI_ASSOC);
+                    foreach ($files as $uFiles) 
+                        {
+                        ?> 
+                        <div style="font-size: 20px; padding: 8px; border-bottom: 1px solid grey;"><a href="<?=$uFiles['path']?>">* Задание от <?=date('d.m.Y',strtotime($uFiles['date']))?></a></div>
+                        <?php
+                        }
+                    }
+                ?>
+                <!--/select-->
                 </div>
             </div>
         </div>
@@ -144,41 +169,3 @@ if (!$_SESSION['user']) {
     <script src="assets/js/main.js"></script>
 </body>
 </html>
-<?php
-    $name = time().$_FILES['userFiles']['name'];
-    $tmp_name = $_FILES['userFiles']['tmp_name'];
-    $id_user = $_SESSION['user']['id'];
-    $id_subject = $_GET['subject_id'];
-    $data = $_POST['fileData'];
-    $class = $_SESSION['user']['classnumber'];
-    $path = "uploads/$id_user/$id_subject/$data/";
-    $pathName = "uploads/$id_user/$id_subject/$data/$name";
-    $uploadButton = $_POST['uploadBtn'];
-    
-    if (isset($uploadButton))
-    {
-        if (is_dir($path))
-        {
-            if (!move_uploaded_file($tmp_name,$pathName))
-            {
-                echo "File is not uploaded!";
-            } 
-            else
-            {
-                mysqli_query ($connect, "INSERT INTO `uploads`(`id`, `user_id`, `subject_id`, `class`, `date`, `path`) VALUES (NULL, '$id_user', '$id_subject', '$class', '$data', '$pathName')");
-            }
-        }
-        else 
-        {
-            mkdir($path, 0755, true);
-            if (!move_uploaded_file($tmp_name,$pathName))
-            {
-                echo "File is not uploaded!";
-            } 
-            else
-            {
-                mysqli_query ($connect, "INSERT INTO `uploads`(`id`, `user_id`, `subject_id`, `class`, `date`, `path`) VALUES (NULL, '$id_user', '$id_subject', '$class', '$data', '$pathName')");
-            }
-        }
-    }
-?>
