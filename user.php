@@ -119,6 +119,25 @@ if (!$_SESSION['user']) {
                     <button name="uploadBtn" class="uploadElement" type="submit">Загрузить</button>
                     </form>     
                 </div>
+                <?php
+                    $fUserID = $_GET['user_id'];
+                    $fSubjectID = $_GET['subject_id'];
+                    $fClassID = $_SESSION['user']['classnumber'];
+                    $uploadFiles = mysqli_query($connect, "SELECT * FROM `uploads` 
+                    WHERE `user_id` = '$fUserID' 
+                    AND `subject_id` = '$fSubjectID' 
+                    AND `class` = '$fClassID'");
+                    if (mysqli_num_rows($uploadFiles) > 0) 
+                    {
+                    $files = mysqli_fetch_all($uploadFiles, MYSQLI_ASSOC);
+                    foreach ($files as $uFiles) 
+                        {
+                        ?> 
+                        <div style="display: flex; justify-content: center;font-size: 20px; padding: 8px; text-align:center; margin-top: 10px;"><a style="border-bottom: 1px solid grey;" href="<?=$uFiles['path']?>">* Загружено <?=date('d.m.Y',strtotime($uFiles['date']))?></a><p><a href="#"><img style="width:25px; height: 20px; margin-left: 10px;" src="images/del_ico.png" alt=""></a></p></div>
+                        <?php
+                        }
+                    }
+                ?>
                 </div>
                 </div>
             </div>
@@ -150,24 +169,36 @@ if (!$_SESSION['user']) {
     {
         if (is_dir($path))
         {
-            if (!move_uploaded_file($tmp_name,$pathName))
+            if (!move_uploaded_file($tmp_name,$pathName) or $data == "")
             {
                 echo "File is not uploaded!";
+                ?>
+                <script>alert("Файл не загружен");</script>
+                <?php
             } 
             else
             {
                 mysqli_query ($connect, "INSERT INTO `uploads`(`id`, `user_id`, `subject_id`, `class`, `date`, `path`) VALUES (NULL, '$id_user', '$id_subject', '$class', '$data', '$pathName')");
+                ?>
+                    <script>alert("Файл успешно загружен");</script>
+                <?php
             }
         }
         else 
         {
             mkdir($path, 0755, true);
-            if (!move_uploaded_file($tmp_name,$pathName))
+            if (!move_uploaded_file($tmp_name,$pathName) or $data == "")
             {
                 echo "File is not uploaded!";
+                ?>
+                <script>alert("Файл не загружен");</script>
+                <?php
             } 
             else
             {
+                ?>
+                <script>alert("Файл успешно загружен");</script>
+                <?php
                 mysqli_query ($connect, "INSERT INTO `uploads`(`id`, `user_id`, `subject_id`, `class`, `date`, `path`) VALUES (NULL, '$id_user', '$id_subject', '$class', '$data', '$pathName')");
             }
         }
